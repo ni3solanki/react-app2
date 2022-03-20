@@ -27,7 +27,10 @@ const News = (props) => {
 
     useEffect(() => {
         loadNewsList();
-    })
+    }, 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [])
+    
 
     const fetchMoreData = async () => {
         setloading(true);
@@ -36,6 +39,7 @@ const News = (props) => {
         let data = await fetch(apiUrl);
         let newsResponse = await data.json();
         setnewsList(newsResponse.articles)
+        setnewsList(newsList.concat(newsResponse.articles))
         setTotalNews(newsResponse.totalResults)
         setloading(false);
     };
